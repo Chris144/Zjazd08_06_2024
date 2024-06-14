@@ -9,7 +9,7 @@ class TestBase(unittest.TestCase):
     Base class for each test
     """
 
-    def setup_class(self):
+    def setUp(self):
         # Setup Phase
         self.driver = webdriver.Firefox()
         self.driver.maximize_window()
