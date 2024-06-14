@@ -1,31 +1,29 @@
-import pytest
+import unittest
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-class TestBase:
+class TestBase(unittest.TestCase):
     """
     Base class for each test
     """
 
-    @pytest.fixture(scope="class", autouse=True)
-    def setup_class(self, request):
+    def setup_class(self):
         # Setup Phase
         self.driver = webdriver.Firefox()
         self.driver.maximize_window()
         self.driver.get("http://seleniumdemo.com/")
         self.driver.implicitly_wait(5)
-        request.cls.driver = self.driver
-        # Yield to test
-        yield
-        # Teardown Phase
-        self.driver.quit()
 
     def test_check_text(self):
-        text = self.driver.find_element(By.CLASS_NAME, 'sek-module-inner')
-        assert text.text == "Design your own space"
-        print(text.text)
+        order = self.driver.find_element(By.CLASS_NAME, 'sek-module-inner')
+        self.assertEqual("Design your own space", order.text)
+        print(order.text)
+
+    def tearDown(self):
+        self.driver.quit()
 
 
 if __name__ == '__main__':
-    pytest.main()
+    unittest.main()
