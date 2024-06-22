@@ -1,5 +1,6 @@
 import unittest
 import allure
+import allure_unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -18,6 +19,7 @@ class TestBase(unittest.TestCase):
         self.driver.implicitly_wait(5)
 
     @allure.story("Check Text Presence")
+    @allure.severity(allure.severity_level.NORMAL)
     def test_check_text(self):
         with allure.step("Find element with class name 'sek-module-inner"):
             order = self.driver.find_element(By.CLASS_NAME, 'sek-module-inner')
@@ -30,4 +32,4 @@ class TestBase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(allure_unittest.result)
