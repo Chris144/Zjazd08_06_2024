@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 
 @allure.feature("Base Test")
-class TestBase:
+class TestBase(pytest):
 
     @allure.story("Check Text Presence")
     def test_check_text(self):
@@ -24,4 +24,4 @@ class TestBase:
 
 
 if __name__ == '__main__':
-    pytest.main(["--allure dir=allure-results"])
+    pytest.main(["--alluredir=allure-results"])
