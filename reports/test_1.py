@@ -1,11 +1,13 @@
-import pytest
+# import pytest
+import unittest
+
 import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
 @allure.feature("Base Test")
-class TestBase:
+class TestBase(unittest.TestCase):
 
     @allure.story("Check Text Presence")
     def test_check_text(self):
@@ -24,4 +26,4 @@ class TestBase:
 
 
 if __name__ == '__main__':
-    pytest.main(["--alluredir=allure-results"])
+    unittest.main()
