@@ -1,6 +1,6 @@
-# import pytest
 import unittest
 
+import pytest
 import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -26,4 +26,4 @@ class TestBase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(['--alluredir = allure - results'])
