@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 
 
 @allure.feature("Base Test")
-class TestBase(unittest.TestCase):
+class TestBase(allure_unittest):
     """
     Base class for each test
     """
