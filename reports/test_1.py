@@ -1,39 +1,27 @@
-import unittest
-
+import pytest
 import allure
-import allure_unittest
-
-from allure_commons.types import AttachmentType
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
 @allure.feature("Base Test")
-class TestBase(unittest.TestCase):
-    """
-    Base class for each test
-    """
-
-    def setUp(self):
-        # Setup Phase
-        self.driver = webdriver.Firefox()
-        self.driver.maximize_window()
-        self.driver.get("http://seleniumdemo.com/")
-        self.driver.implicitly_wait(5)
+class TestBase:
 
     @allure.story("Check Text Presence")
-    @allure.severity(allure.severity_level.BLOCKER)
     def test_check_text(self):
-        with allure.step("Find element with class name 'sek-module-inner"):
-            order = self.driver.find_element(By.CLASS_NAME, 'sek-module-inner')
-        with allure.step("Verify the text of the element"):
-            self.assertEqual("Design your own space", order.text)
-        print(order.text)
-        allure.attach(self.driver.get_full_page_screenshot_as_png(), name='test', attachment_type=AttachmentType.PNG)
+        driver = webdriver.Firefox()
+        driver.maximize_window()
+        driver.get("http://seleniumdemo.com/")
+        driver.implicitly_wait(5)
 
-    def tearDown(self):
-        self.driver.quit()
+        with allure.step("Find element with class name 'sek-module-inner"):
+            order = driver.find_element(By.CLASS_NAME, 'sek-module-inner')
+        with allure.step("Verify the text of the element"):
+            assert order.text == "Design your own space"
+        print(order.text)
+
+        driver.quit()
 
 
 if __name__ == '__main__':
-    unittest.main(allure_unittest.result)
+    pytest.main(["--allure dir=allure-results"])
