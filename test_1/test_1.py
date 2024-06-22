@@ -1,9 +1,10 @@
 import unittest
-
+import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
+@allure.feature("Base Test")
 class TestBase(unittest.TestCase):
     """
     Base class for each test
@@ -16,9 +17,12 @@ class TestBase(unittest.TestCase):
         self.driver.get("http://seleniumdemo.com/")
         self.driver.implicitly_wait(5)
 
+    @allure.story("Check Text Presence")
     def test_check_text(self):
-        order = self.driver.find_element(By.CLASS_NAME, 'sek-module-inner')
-        self.assertEqual("Design your own space", order.text)
+        with allure.step("Find element with class name 'sek-module-inner"):
+            order = self.driver.find_element(By.CLASS_NAME, 'sek-module-inner')
+        with allure.step("Verify the text of the element"):
+            self.assertEqual("Design your own space", order.text)
         print(order.text)
 
     def tearDown(self):
