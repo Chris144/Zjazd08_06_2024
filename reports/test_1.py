@@ -1,5 +1,3 @@
-import unittest
-
 import pytest
 import allure
 from selenium import webdriver
@@ -7,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 
 @allure.feature("Base Test")
-class TestBase(unittest.TestCase):
+class TestBase:
 
     @allure.story("Check Text Presence")
     def test_check_text(self):
@@ -16,7 +14,7 @@ class TestBase(unittest.TestCase):
         driver.get("http://seleniumdemo.com/")
         driver.implicitly_wait(5)
 
-        with allure.step("Find element with class name 'sek-module-inner"):
+        with allure.step("Find element with class name 'sek-module-inner'"):
             order = driver.find_element(By.CLASS_NAME, 'sek-module-inner')
         with allure.step("Verify the text of the element"):
             assert order.text == "Design your own space"
@@ -26,4 +24,4 @@ class TestBase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(['--alluredir = allure - results'])
+    pytest.main(["--alluredir=allure-results"])
